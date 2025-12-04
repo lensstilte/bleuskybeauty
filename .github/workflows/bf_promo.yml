@@ -1,1 +1,34 @@
-run: python bots/bf_promo_bot.py
+name: BF Promo Bot
+
+on:
+  workflow_dispatch:    # Alleen handmatig starten
+
+jobs:
+  run-bf-promo:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v4
+
+      - name: 🐍 Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: 📦 Install dependencies
+        run: |
+          pip install atproto
+
+      - name: 🚀 Run BF Promo bot
+        env:
+          BSKY_USERNAME: ${{ secrets.BSKY_USERNAME }}
+          BSKY_PASSWORD: ${{ secrets.BSKY_PASSWORD }}
+          QUOTE_BSKY_USERNAME: ${{ secrets.QUOTE_BSKY_USERNAME }}
+          QUOTE_BSKY_PASSWORD: ${{ secrets.QUOTE_BSKY_PASSWORD }}
+          REPOST2_BSKY_USERNAME: ${{ secrets.REPOST2_BSKY_USERNAME }}
+          REPOST2_BSKY_PASSWORD: ${{ secrets.REPOST2_BSKY_PASSWORD }}
+        run: |
+          echo "🔹 Start BF Promo bot"
+          python bots/bf_promo_bot.py
+          echo "🔹 BF Promo bot klaar"
