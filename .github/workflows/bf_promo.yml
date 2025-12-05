@@ -2,7 +2,7 @@ name: BF Promo Bot
 
 on:
   schedule:
-    - cron: "0 */4 * * *"   # Elke 4 uur op het hele uur
+    - cron: "0 */2 * * *"   # Elke 4 uur op het hele uur
   workflow_dispatch:        # Handmatig starten blijft mogelijk
 
 jobs:
