@@ -1,0 +1,36 @@
+name: BleuskyBeauty Reposter (10 oude + 10 nieuwe)
+
+on:
+  schedule:
+    # Elke 2 uur (UTC)
+    - cron: "0 */2 * * *"
+  workflow_dispatch: {}
+
+jobs:
+  repost:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+
+    env:
+      BSKY_USERNAME: ${{ secrets.BSKY_USERNAME }}
+      BSKY_PASSWORD: ${{ secrets.BSKY_PASSWORD }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests
+
+      - name: Run BleuskyBeauty reposter
+        run: |
+          python bleuskybeauty_reposter.py
