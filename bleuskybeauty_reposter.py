@@ -192,11 +192,11 @@ def main():
     posts_sorted = sorted(posts, key=lambda p: parse_iso(p["createdAt"]))
 
     # Alleen de nieuwste 3 posts
-    newest_3 = posts_sorted[-3:]
+    newest_5 = posts_sorted[-5:]
 
     # Oud -> nieuw reposten, zodat de nieuwste als laatste wordt gerepost
     # en daardoor bovenaan eindigt
-    for post in newest_3:
+    for post in newest_5:
         uri = post["uri"]
         cid = post["cid"]
 
